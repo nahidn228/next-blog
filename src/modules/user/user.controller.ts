@@ -1,11 +1,9 @@
 import { Request, Response } from "express";
 import { UserService } from "./user.service";
 
-const createUser = (req: Request, res: Response) => {
-  const userData = req.body;
-
+const createUser = async (req: Request, res: Response) => {
   try {
-    const result = UserService.createUser(userData);
+    const result = await UserService.createUser(req.body);
     console.log(result);
 
     res.send(result);
@@ -14,6 +12,12 @@ const createUser = (req: Request, res: Response) => {
   }
 };
 
+const getAllUsers = async (req: Request, res: Response) => {
+  const result = await UserService.getAllUserFromDb();
+  res.send(result);
+};
+
 export const UserController = {
   createUser,
+  getAllUsers
 };

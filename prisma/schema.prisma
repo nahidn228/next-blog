@@ -14,7 +14,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model user {
+model User {
   id         Int        @id @default(autoincrement())
   name       String
   email      String
@@ -26,10 +26,10 @@ model user {
   isVerified Boolean    @default(false)
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
-  posts      post[]
+  posts      Post[]
 }
 
-model post {
+model Post {
   id         Int      @id @default(autoincrement())
   title      String
   content    String
@@ -38,7 +38,7 @@ model post {
   tags       String[]
   views      Int      @default(0)
   authorId   Int
-  author     user     @relation(fields: [authorId], references: [id])
+  author     User     @relation(fields: [authorId], references: [id])
   createdAt  DateTime @default(now())
   updatedAt  DateTime @updatedAt
 }
