@@ -8,6 +8,24 @@ const createUser = async (payload: Prisma.userCreateInput): Promise<user> => {
   return createdUser;
 };
 
+const updateUser = async (id: number, payload: Partial<user>) => {
+  const updatedUser = await prisma.user.update({
+    where: {
+      id: id,
+    },
+    data: payload,
+  });
+  return updatedUser;
+};
+const deleteUser = async (id: number) => {
+  const deletedUser = await prisma.user.delete({
+    where: {
+      id,
+    },
+  });
+  return deletedUser;
+};
+
 const getAllUserFromDb = async () => {
   const users = await prisma.user.findMany({
     select: {
@@ -56,6 +74,8 @@ const getUserById = async (id: number) => {
 
 export const UserService = {
   createUser,
+  updateUser,
+  deleteUser,
   getAllUserFromDb,
   getUserById,
 };

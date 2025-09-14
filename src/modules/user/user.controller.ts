@@ -20,6 +20,48 @@ const createUser = async (req: Request, res: Response) => {
     });
   }
 };
+const updateUser = async (req: Request, res: Response) => {
+  const id = req.params.id;
+  const data = req.body;
+  try {
+    const result = await UserService.updateUser(Number(id), data);
+    console.log(result);
+
+    res.status(201).json({
+      success: true,
+      message: "User Updated successfully",
+      data: result,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to create user",
+      error: (error as Error).message,
+    });
+  }
+};
+const deleteUser = async (req: Request, res: Response) => {
+  const id = req.params.id;
+
+  try {
+    const result = await UserService.deleteUser(Number(id));
+    console.log(result);
+
+    res.status(201).json({
+      success: true,
+      message: "User deleted successfully",
+      data: null,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      success: false,
+      message: "Failed to create user",
+      error: (error as Error).message,
+    });
+  }
+};
 
 const getAllUsers = async (req: Request, res: Response) => {
   try {
@@ -60,6 +102,8 @@ const getUserById = async (req: Request, res: Response) => {
 
 export const UserController = {
   createUser,
+  updateUser,
+  deleteUser,
   getAllUsers,
   getUserById,
 };
