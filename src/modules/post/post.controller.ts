@@ -96,6 +96,23 @@ const updatePost = async (req: Request, res: Response) => {
   }
 };
 
+const getBlogStats = async (req: Request, res: Response) => {
+  try {
+    const stat = await PostService.getBlogStats();
+    res.status(200).json({
+      success: true,
+      message: "Retrieved Blog Stat successfully",
+      data: stat,
+    });
+  } catch (error) {
+    res.status(500).send({
+      success: false,
+      message: "Retrieved Blog Stat failed",
+      
+    });
+  }
+};
+
 const deletePost = async (req: Request, res: Response) => {
   try {
     await PostService.deletePost(Number(req.params.id));
@@ -115,6 +132,7 @@ const deletePost = async (req: Request, res: Response) => {
 
 export const PostController = {
   createPost,
+  getBlogStats,
   getAllPosts,
   getPostById,
   updatePost,
