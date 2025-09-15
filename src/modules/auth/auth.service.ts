@@ -25,8 +25,21 @@ const loginWithEmailPassword = async ({
   }
 };
 
+const loginWithGoogle = async (data: Prisma.UserCreateInput) => {
+  let user = await prisma.user.findUnique({
+    where: {
+      email: data.email,
+    },
+  });
 
+  if (!user) {
+    await prisma.user.create({ data });
+  }
+
+  return user;
+};
 
 export const AuthService = {
   loginWithEmailPassword,
+  loginWithGoogle,
 };
