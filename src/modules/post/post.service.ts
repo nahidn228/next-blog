@@ -146,6 +146,17 @@ const getBlogStats = async () => {
       orderBy: { views: "desc" },
     });
 
+    const lastWeek = new Date();
+    lastWeek.setDate(lastWeek.getDate() - 7);
+
+    const lastWeekPost = await tx.post.count({
+      where: {
+        createdAt: {
+          gte: lastWeek,
+        },
+      },
+    });
+
     return {
       stats: {
         totalPosts: aggregates._count ?? 0,
@@ -158,6 +169,7 @@ const getBlogStats = async () => {
         count: featuredCount,
         topPost: topFeatured,
       },
+      lastWeekPostCount: lastWeekPost,
     };
   });
 
