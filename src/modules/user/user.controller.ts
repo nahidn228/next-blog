@@ -4,7 +4,7 @@ import { UserService } from "./user.service";
 const createUser = async (req: Request, res: Response) => {
   try {
     const result = await UserService.createUser(req.body);
-    console.log(result);
+   
 
     res.status(201).json({
       success: true,
@@ -25,7 +25,7 @@ const updateUser = async (req: Request, res: Response) => {
   const data = req.body;
   try {
     const result = await UserService.updateUser(Number(id), data);
-    console.log(result);
+    
 
     res.status(201).json({
       success: true,
@@ -46,7 +46,7 @@ const deleteUser = async (req: Request, res: Response) => {
 
   try {
     const result = await UserService.deleteUser(Number(id));
-    console.log(result);
+    
 
     res.status(201).json({
       success: true,
