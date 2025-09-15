@@ -24,12 +24,16 @@ const getAllPosts = async ({
   search,
   isFeatured,
   tags,
+  sortBy,
+  sortOrder,
 }: {
   page: number;
   limit: number;
   search?: string;
   isFeatured?: boolean;
   tags?: string[];
+  sortBy?: string;
+  sortOrder?: string;
 }) => {
   const skip = (page - 1) * limit;
 
@@ -63,7 +67,19 @@ const getAllPosts = async ({
     take: limit,
     where,
   });
-  return result;
+
+  const totalData = await prisma.post.count({ where });
+  const totalPages = Math.ceil(totalData / limit);
+
+  return {
+    data: result,
+    pagination: {
+      page,
+      limit,
+      totalData,
+      totalPages,
+    },
+  };
 };
 
 const getPostById = async (id: number) => {
