@@ -1,14 +1,14 @@
-import { Prisma, user } from "@prisma/client";
+import { Prisma, User } from "@prisma/client";
 import { prisma } from "../../config/db";
 
-const createUser = async (payload: Prisma.userCreateInput): Promise<user> => {
+const createUser = async (payload: Prisma.UserCreateInput): Promise<User> => {
   const createdUser = await prisma.user.create({
     data: payload,
   });
   return createdUser;
 };
 
-const updateUser = async (id: number, payload: Partial<user>) => {
+const updateUser = async (id: number, payload: Partial<User>) => {
   const updatedUser = await prisma.user.update({
     where: {
       id: id,

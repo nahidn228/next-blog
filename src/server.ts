@@ -28,7 +28,7 @@ async function startServer() {
 
     handleProcessEvents();
   } catch (error) {
-    console.error("❌ Error during server startup:", error);
+    console.error("❌Error during server startup:", error);
     process.exit(1);
   }
 }

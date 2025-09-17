@@ -165,11 +165,11 @@ const getBlogStats = async () => {
         maxViews: aggregates._max.views ?? 0,
         minViews: aggregates._min.views ?? 0,
       },
+      lastWeekPostCount: lastWeekPost,
       featured: {
         count: featuredCount,
         topPost: topFeatured,
       },
-      lastWeekPostCount: lastWeekPost,
     };
   });
 
